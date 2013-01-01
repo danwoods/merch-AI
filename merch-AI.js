@@ -65,19 +65,20 @@ function search(q) {
       {uri: url}, 
       function(error, response, body) {
         var $ = cheerio.load(body),
-            imageSrc = $("div#result_0 div.image img").attr('src'), 
             prodList = $("div#atfResults div.prod"); 
         
         var data = [];
         for(var i = 0; i< prodList.length; i++){
           var imgSrc = $(prodList[i]).find('img').attr('src'),
-              link = $(prodList[i]).find('h3.newaps').find('a').attr('href');
-          data.push({ "img-src": imgSrc, "link": link }); 
+              link = $(prodList[i]).find('h3.newaps').find('a').attr('href'),
+              price = $(prodList[i]).find('ul.rsltL li span.bld').text();
+          data.push({ "img-src": imgSrc, "link": link, "price": price }); 
         }
         var map = plates.Map();
         
         map.where('src').is("/").insert('img-src');
         map.where('href').is("/").insert('link');
+        map.class('price').to('price');
 
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(plates.bind(html, data, map));
