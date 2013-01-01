@@ -1,13 +1,12 @@
 # merch-AI
 
-Automated creation and deployment of mercandise pages, based on trends
+Automated creation and deployment of mercandise pages
 
 ## Getting Started
 Install the module with: `npm install merch-AI`
 
-```javascript
-var merch_AI = require('merch-AI');
-merch_AI.awesome(); // "awesome"
+```shell
+node merch-AI.js --url __url__ --type __type__
 ```
 
 ## Documentation
@@ -22,6 +21,3 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
 _(Nothing yet)_
 
-## License
-Copyright (c) 2013 Dan Woodson  
-Licensed under the MIT license.
