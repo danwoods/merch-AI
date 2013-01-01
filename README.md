@@ -6,7 +6,7 @@ Automated creation and deployment of mercandise pages
 Install the module with: `npm install merch-AI`
 
 ```shell
-node merch-AI.js --url __url__ --type __type__
+node merch-AI.js --url [url] --type [type]
 ```
 
 ## Documentation
