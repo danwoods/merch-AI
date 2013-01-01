@@ -12,11 +12,11 @@ nconf.argv({
     demand: true,
     default: 'http://www.jspro.com'
   },
-  'siteType': {
+  'pageType': {
     alias: 'type',
-    describe: 'The type of page to scrape, ie: "amazon", "google"',
+    describe: 'The type of page to scrape, ie: "amazon-search"',
     demand: true,
-    default: 'amazon'
+    default: 'amazon-search'
   }
 });
 
@@ -30,10 +30,16 @@ logger.info('type = '+type);
 request({uri: url}, 
         function(error, response, body) {
           var $ = cheerio.load(body);
-          $(".entry-title > a").each(function() {
-            var link = $(this);
-            var text = link.text();
-            var href = link.attr("href");
-            console.log(text + " -> " + href);
-          });
+          if(type === 'amazon-search'){
+            var imageSrc = $("div#result_0 div.image img").attr('src'); 
+            logger.info('Image srouce = '+imageSrc);
+          }
+          else {
+            $(".entry-title > a").each(function() {
+              var link = $(this);
+              var text = link.text();
+              var href = link.attr("href");
+              console.log(text + " -> " + href);
+            });
+          }
 });
